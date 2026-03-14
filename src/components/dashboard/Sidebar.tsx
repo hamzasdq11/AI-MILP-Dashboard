@@ -1,6 +1,9 @@
 import { motion } from "framer-motion";
 import { 
-  BarChart3, 
+  BarChart3,
+  GitBranch,
+  Users2,
+  TrendingUp,
   Settings, 
   Database,
   Layers,
