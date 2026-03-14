@@ -103,7 +103,7 @@ export default function WhatIfPanel() {
             style={{ background: "hsl(228, 62%, 18%, 0.05)", border: "1.5px solid hsl(228, 62%, 18%, 0.12)" }}
           >
             <p className="text-[11px] font-semibold" style={{ color: "hsl(228, 62%, 18%)" }}>
-              ⚡ These are projected estimates. Click below to run the MILP solver with updated parameters.
+              These are projected estimates. Click below to run the MILP solver with updated parameters.
             </p>
           </motion.div>
         )}

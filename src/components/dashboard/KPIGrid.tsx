@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { TrendingUp, TrendingDown, Minus, Info } from "lucide-react";
+import { TrendingUp, TrendingDown, Minus, Info, BarChart2, Users, BookOpen, Zap, AlertTriangle, Binary } from "lucide-react";
 import { kpis } from "@/data/allocationData";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
@@ -12,19 +12,30 @@ const tooltips: Record<string, string> = {
   "Decision Variables": "14,547 assignment + 39 activation + 373 fairness indicators.",
 };
 
-const icons: Record<string, string> = {
-  "Bid Satisfaction": "📊",
-  "Students Allocated": "👥",
-  "Active Courses": "📚",
-  "Solve Time": "⚡",
-  "Forced Assignments": "⚠️",
-  "Decision Variables": "🔢",
+const iconComponents: Record<string, React.ElementType> = {
+  "Bid Satisfaction": BarChart2,
+  "Students Allocated": Users,
+  "Active Courses": BookOpen,
+  "Solve Time": Zap,
+  "Forced Assignments": AlertTriangle,
+  "Decision Variables": Binary,
+};
+
+const iconColors: Record<string, string> = {
+  "Bid Satisfaction": "hsl(228, 62%, 28%)",
+  "Students Allocated": "hsl(210, 60%, 45%)",
+  "Active Courses": "hsl(152, 50%, 38%)",
+  "Solve Time": "hsl(38, 80%, 50%)",
+  "Forced Assignments": "hsl(0, 60%, 50%)",
+  "Decision Variables": "hsl(270, 50%, 50%)",
 };
 
 export default function KPIGrid() {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
-      {kpis.map((kpi, i) => (
+      {kpis.map((kpi, i) => {
+        const IconComp = iconComponents[kpi.label];
+        return (
         <motion.div
           key={kpi.label}
           initial={{ y: 15, opacity: 0 }}
@@ -34,7 +45,9 @@ export default function KPIGrid() {
         >
           <div className="flex items-start justify-between mb-3">
             <div className="flex items-center gap-2">
-              <span className="text-base">{icons[kpi.label]}</span>
+              <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: `${iconColors[kpi.label]}15` }}>
+                {IconComp && <IconComp className="w-3.5 h-3.5" style={{ color: iconColors[kpi.label] }} />}
+              </div>
               <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-muted-foreground">
                 {kpi.label}
               </span>
@@ -59,7 +72,8 @@ export default function KPIGrid() {
             <span className="text-[11px] text-muted-foreground font-medium">{kpi.subLabel}</span>
           </div>
         </motion.div>
-      ))}
+        );
+      })}
     </div>
   );
 }
