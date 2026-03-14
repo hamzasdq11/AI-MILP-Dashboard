@@ -70,9 +70,12 @@ const Index = () => {
             </div>
           )}
 
+          {activeSection === "methodology" && <MethodologyPanel />}
+          {activeSection === "humanai" && <HumanAIPanel />}
           {activeSection === "constraints" && <ConstraintPanel />}
           {activeSection === "whatif" && <WhatIfPanel />}
           {activeSection === "exceptions" && <ExceptionPanel />}
+          {activeSection === "impact" && <ImpactPanel />}
         </div>
       </main>
 
