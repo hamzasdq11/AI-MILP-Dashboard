@@ -36,11 +36,11 @@ export default function ExceptionPanel() {
       initial={{ y: 10, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ delay: 0.1, duration: 0.4, ease: [0.2, 0.8, 0.2, 1] }}
-      className="space-y-4"
+      className="space-y-5"
     >
-      <div className="glass-card p-4">
+      <div className="glass-card p-5">
         <div className="flex items-center gap-2 mb-3">
-          <AlertTriangle className="w-4 h-4" style={{ color: "hsl(var(--warning))" }} />
+          <AlertTriangle className="w-4 h-4 text-warning" />
           <h3 className="text-sm font-semibold text-foreground">Exception Audit Log</h3>
         </div>
         <p className="text-[11px] text-muted-foreground mb-4">
@@ -54,10 +54,10 @@ export default function ExceptionPanel() {
               initial={{ x: -10, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: 0.2 + i * 0.06, duration: 0.3 }}
-              className="p-3 rounded-md border"
+              className="p-3.5 rounded-lg border"
               style={{
-                background: ex.critical ? "hsl(var(--risk) / 0.06)" : "hsl(var(--muted) / 0.3)",
-                borderColor: ex.critical ? "hsl(var(--risk) / 0.2)" : "hsl(var(--border))",
+                background: ex.critical ? "hsl(var(--risk) / 0.04)" : "hsl(var(--background))",
+                borderColor: ex.critical ? "hsl(var(--risk) / 0.25)" : "hsl(var(--border))",
               }}
             >
               <div className="flex items-center justify-between mb-1.5">
@@ -72,7 +72,7 @@ export default function ExceptionPanel() {
               </div>
               <div className="flex flex-wrap gap-1 mb-1.5">
                 {ex.forced.map(c => (
-                  <span key={c} className="text-[10px] px-1.5 py-0.5 rounded" style={{ background: "hsl(var(--warning) / 0.1)", color: "hsl(var(--warning))" }}>
+                  <span key={c} className="text-[10px] px-2 py-0.5 rounded-md" style={{ background: "hsl(var(--warning) / 0.1)", color: "hsl(var(--warning))" }}>
                     {c}
                   </span>
                 ))}
@@ -83,18 +83,17 @@ export default function ExceptionPanel() {
         </div>
       </div>
 
-      {/* Public Service Marketing Insight */}
-      <div className="glass-card p-4">
+      <div className="glass-card p-5">
         <div className="flex items-center gap-2 mb-3">
-          <Info className="w-4 h-4" style={{ color: "hsl(var(--primary))" }} />
+          <Info className="w-4 h-4 text-primary" />
           <h3 className="text-sm font-semibold text-foreground">Counter-Intuitive Insight</h3>
         </div>
-        <div className="p-3 rounded-md" style={{ background: "hsl(var(--primary) / 0.06)", border: "1px solid hsl(var(--primary) / 0.15)" }}>
+        <div className="p-4 rounded-lg" style={{ background: "hsl(var(--primary) / 0.04)", border: "1px solid hsl(var(--primary) / 0.15)" }}>
           <p className="text-xs font-medium text-foreground mb-1">Public Service Marketing — Cancelled Despite 43 Bidders</p>
           <p className="text-[11px] text-muted-foreground leading-relaxed">
             The solver determined that redistributing PSM's 43 bidders to their other preferred courses yields
             higher total cohort satisfaction than keeping PSM active. This is a non-obvious outcome that
-            <span className="font-semibold" style={{ color: "hsl(var(--primary))" }}> only global optimisation can discover </span>
+            <span className="font-semibold text-primary"> only global optimisation can discover </span>
             — a rule-based system filtering on demand ≥ 40 would have produced a suboptimal result.
           </p>
         </div>
