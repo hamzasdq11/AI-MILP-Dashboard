@@ -72,7 +72,8 @@ export default function KPIGrid() {
             <span className="text-[11px] text-muted-foreground font-medium">{kpi.subLabel}</span>
           </div>
         </motion.div>
-      ))}
+        );
+      })}
     </div>
   );
 }
