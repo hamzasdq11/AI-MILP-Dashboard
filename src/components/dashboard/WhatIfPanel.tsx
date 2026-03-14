@@ -62,22 +62,24 @@ export default function WhatIfPanel() {
     >
       <div className="glass-card p-5">
         <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-2">
-            <Zap className="w-4 h-4 text-warning" />
-            <h3 className="text-sm font-semibold text-foreground">What-If Scenario Engine</h3>
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: "hsl(38, 92%, 50%)", color: "white" }}>
+              <Zap className="w-4 h-4" />
+            </div>
+            <div>
+              <h3 className="text-sm font-bold text-foreground">What-If Scenario Engine</h3>
+              <p className="text-[10px] text-muted-foreground font-medium">Explore trade-offs before re-running the solver</p>
+            </div>
           </div>
           {isModified && (
-            <button onClick={reset} className="flex items-center gap-1 text-[11px] text-muted-foreground hover:text-foreground transition-colors">
+            <button onClick={reset} className="flex items-center gap-1.5 text-[10px] font-bold text-muted-foreground hover:text-foreground transition-colors uppercase tracking-wider">
               <RotateCcw className="w-3 h-3" />
               Reset
             </button>
           )}
         </div>
-        <p className="text-[11px] text-muted-foreground mb-5">
-          Adjust parameters to see how the allocation shifts. This empowers managers to explore trade-offs before re-running the solver.
-        </p>
 
-        <div className="space-y-5">
+        <div className="space-y-5 mt-5">
           <SliderControl label="Minimum Enrollment Threshold" value={minEnrollment} min={20} max={80} onChange={setMinEnrollment} suffix=" students" baseline={40} />
           <SliderControl label="Fairness Cap (Max Forced)" value={fairnessCap} min={0} max={20} onChange={setFairnessCap} suffix=" students" baseline={5} />
           <SliderControl label="Courses Per Student" value={coursesPerStudent} min={4} max={8} onChange={setCoursesPerStudent} suffix=" courses" baseline={6} />
@@ -85,7 +87,7 @@ export default function WhatIfPanel() {
       </div>
 
       <div className="glass-card p-5">
-        <h4 className="text-xs font-semibold text-foreground mb-3">Projected Outcome</h4>
+        <h4 className="text-[10px] font-bold uppercase tracking-[0.15em] text-muted-foreground mb-4">Projected Outcome</h4>
         <div className="grid grid-cols-2 gap-3">
           <ResultCard label="Predicted Satisfaction" value={`${simulation.ratio}%`} delta={parseFloat(simulation.delta)} />
           <ResultCard label="Active Courses" value={`${simulation.courses}/39`} delta={simulation.courses - 30} />
@@ -97,17 +99,21 @@ export default function WhatIfPanel() {
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
-            className="mt-3 p-3 rounded-lg" style={{ background: "hsl(var(--primary) / 0.06)", border: "1px solid hsl(var(--primary) / 0.15)" }}
+            className="mt-4 p-3.5 rounded-xl"
+            style={{ background: "hsl(228, 62%, 18%, 0.05)", border: "1.5px solid hsl(228, 62%, 18%, 0.12)" }}
           >
-            <p className="text-[11px] text-primary font-medium">
-              ⚡ These are projected estimates. Click "Confirm & Re-Solve" to run the MILP solver with updated parameters.
+            <p className="text-[11px] font-semibold" style={{ color: "hsl(228, 62%, 18%)" }}>
+              ⚡ These are projected estimates. Click below to run the MILP solver with updated parameters.
             </p>
           </motion.div>
         )}
 
         {isModified && (
-          <button className="w-full mt-3 py-2.5 rounded-lg text-xs font-semibold bg-primary text-primary-foreground hover:opacity-90 transition-opacity">
-            Confirm AI Suggestion & Re-Solve
+          <button
+            className="w-full mt-3 py-3 rounded-xl text-xs font-bold text-white transition-all hover:shadow-lg"
+            style={{ background: "linear-gradient(135deg, hsl(228, 62%, 18%), hsl(228, 55%, 28%))" }}
+          >
+            Confirm & Re-Solve with MILP Engine
           </button>
         )}
       </div>
@@ -123,9 +129,9 @@ function SliderControl({
   const isChanged = value !== baseline;
   return (
     <div>
-      <div className="flex items-center justify-between mb-1.5">
-        <span className="text-xs text-muted-foreground">{label}</span>
-        <span className={`font-data text-xs font-semibold ${isChanged ? "text-warning" : "text-foreground"}`}>
+      <div className="flex items-center justify-between mb-2">
+        <span className="text-xs text-muted-foreground font-semibold">{label}</span>
+        <span className={`font-data text-xs font-bold ${isChanged ? "text-warning" : "text-foreground"}`}>
           {value}{suffix}
         </span>
       </div>
@@ -137,7 +143,7 @@ function SliderControl({
         onChange={e => onChange(parseInt(e.target.value))}
         className="slider-track w-full appearance-none"
       />
-      <div className="flex justify-between text-[9px] text-muted-foreground mt-0.5">
+      <div className="flex justify-between text-[9px] text-muted-foreground mt-1 font-medium">
         <span>{min}</span>
         <span className="opacity-50">baseline: {baseline}</span>
         <span>{max}</span>
@@ -149,11 +155,11 @@ function SliderControl({
 function ResultCard({ label, value, delta, invertDelta }: { label: string; value: string; delta: number; invertDelta?: boolean }) {
   const isPositive = invertDelta ? delta <= 0 : delta >= 0;
   return (
-    <div className="p-3 rounded-lg border border-border bg-background">
-      <span className="text-[10px] text-muted-foreground">{label}</span>
-      <div className="font-data text-lg font-bold text-primary mt-0.5">{value}</div>
+    <div className="p-4 rounded-xl" style={{ background: "hsl(228, 30%, 96%)", border: "1.5px solid hsl(228, 30%, 90%)" }}>
+      <span className="text-[9px] font-bold uppercase tracking-wider text-muted-foreground">{label}</span>
+      <div className="font-data text-lg font-bold mt-1" style={{ color: "hsl(228, 62%, 18%)" }}>{value}</div>
       {delta !== 0 && (
-        <span className={`text-[10px] font-data ${isPositive ? "text-success" : "text-risk"}`}>
+        <span className={`text-[10px] font-data font-bold ${isPositive ? "text-success" : "text-risk"}`}>
           {delta > 0 ? "+" : ""}{typeof delta === "number" && Math.abs(delta) > 100 ? delta.toLocaleString() : delta}
         </span>
       )}

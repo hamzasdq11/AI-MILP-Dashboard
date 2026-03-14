@@ -12,25 +12,37 @@ const tooltips: Record<string, string> = {
   "Decision Variables": "14,547 assignment + 39 activation + 373 fairness indicators.",
 };
 
+const icons: Record<string, string> = {
+  "Bid Satisfaction": "📊",
+  "Students Allocated": "👥",
+  "Active Courses": "📚",
+  "Solve Time": "⚡",
+  "Forced Assignments": "⚠️",
+  "Decision Variables": "🔢",
+};
+
 export default function KPIGrid() {
   return (
     <div className="grid grid-cols-3 gap-4">
       {kpis.map((kpi, i) => (
         <motion.div
           key={kpi.label}
-          initial={{ y: 10, opacity: 0 }}
+          initial={{ y: 15, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: i * 0.05, duration: 0.4, ease: [0.2, 0.8, 0.2, 1] }}
+          transition={{ delay: i * 0.06, duration: 0.5, ease: [0.2, 0.8, 0.2, 1] }}
           className="kpi-card group"
         >
-          <div className="flex items-start justify-between mb-2">
-            <span className="text-[11px] font-medium text-muted-foreground uppercase tracking-wider">
-              {kpi.label}
-            </span>
+          <div className="flex items-start justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <span className="text-base">{icons[kpi.label]}</span>
+              <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-muted-foreground">
+                {kpi.label}
+              </span>
+            </div>
             <Tooltip>
               <TooltipTrigger asChild>
                 <button className="opacity-0 group-hover:opacity-100 transition-opacity">
-                  <Info className="w-3 h-3 text-muted-foreground" />
+                  <Info className="w-3.5 h-3.5 text-muted-foreground" />
                 </button>
               </TooltipTrigger>
               <TooltipContent side="left" className="max-w-[260px] text-xs">
@@ -40,11 +52,11 @@ export default function KPIGrid() {
             </Tooltip>
           </div>
           <div className="kpi-value">{kpi.value}</div>
-          <div className="flex items-center gap-1.5 mt-1.5">
+          <div className="flex items-center gap-1.5 mt-2">
             {kpi.trend === "up" && <TrendingUp className="w-3 h-3 text-success" />}
             {kpi.trend === "down" && <TrendingDown className="w-3 h-3 text-risk" />}
             {kpi.trend === "neutral" && <Minus className="w-3 h-3 text-muted-foreground" />}
-            <span className="text-[11px] text-muted-foreground">{kpi.subLabel}</span>
+            <span className="text-[11px] text-muted-foreground font-medium">{kpi.subLabel}</span>
           </div>
         </motion.div>
       ))}
