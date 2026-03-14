@@ -14,7 +14,7 @@ const tooltips: Record<string, string> = {
 
 export default function KPIGrid() {
   return (
-    <div className="grid grid-cols-3 gap-3">
+    <div className="grid grid-cols-3 gap-4">
       {kpis.map((kpi, i) => (
         <motion.div
           key={kpi.label}
@@ -41,8 +41,8 @@ export default function KPIGrid() {
           </div>
           <div className="kpi-value">{kpi.value}</div>
           <div className="flex items-center gap-1.5 mt-1.5">
-            {kpi.trend === "up" && <TrendingUp className="w-3 h-3" style={{ color: "hsl(var(--success))" }} />}
-            {kpi.trend === "down" && <TrendingDown className="w-3 h-3" style={{ color: "hsl(var(--risk))" }} />}
+            {kpi.trend === "up" && <TrendingUp className="w-3 h-3 text-success" />}
+            {kpi.trend === "down" && <TrendingDown className="w-3 h-3 text-risk" />}
             {kpi.trend === "neutral" && <Minus className="w-3 h-3 text-muted-foreground" />}
             <span className="text-[11px] text-muted-foreground">{kpi.subLabel}</span>
           </div>

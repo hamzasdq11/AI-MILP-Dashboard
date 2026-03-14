@@ -8,19 +8,18 @@ export default function ConstraintPanel() {
       initial={{ y: 10, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ delay: 0.1, duration: 0.4, ease: [0.2, 0.8, 0.2, 1] }}
-      className="space-y-4"
+      className="space-y-5"
     >
-      {/* Constraint Breakdown */}
-      <div className="glass-card p-4">
+      <div className="glass-card p-5">
         <div className="flex items-center gap-2 mb-4">
-          <Shield className="w-4 h-4" style={{ color: "hsl(var(--primary))" }} />
+          <Shield className="w-4 h-4 text-primary" />
           <h3 className="text-sm font-semibold text-foreground">Constraint Architecture</h3>
         </div>
         <p className="text-[11px] text-muted-foreground mb-4">
           {modelMetrics.totalConstraints.toLocaleString()} constraints ensure provably optimal allocation
         </p>
 
-        <div className="space-y-2">
+        <div className="space-y-3">
           {constraintBreakdown.map((c, i) => {
             const pct = (c.count / modelMetrics.totalConstraints) * 100;
             return (
@@ -29,7 +28,7 @@ export default function ConstraintPanel() {
                 initial={{ x: -10, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ delay: 0.2 + i * 0.06, duration: 0.3 }}
-                className="space-y-1"
+                className="space-y-1.5"
               >
                 <div className="flex items-center justify-between text-xs">
                   <span className="text-foreground font-medium">{c.name}</span>
@@ -51,10 +50,9 @@ export default function ConstraintPanel() {
         </div>
       </div>
 
-      {/* Model Architecture */}
-      <div className="glass-card p-4">
+      <div className="glass-card p-5">
         <div className="flex items-center gap-2 mb-3">
-          <Lock className="w-4 h-4" style={{ color: "hsl(var(--success))" }} />
+          <Lock className="w-4 h-4 text-success" />
           <h3 className="text-sm font-semibold text-foreground">Optimality Certificate</h3>
         </div>
         <div className="space-y-2">
@@ -65,15 +63,15 @@ export default function ConstraintPanel() {
             { label: "Satisfaction Achieved", value: `${modelMetrics.satisfactionAchieved.toLocaleString()} pts` },
             { label: "Theoretical Maximum", value: `${modelMetrics.satisfactionTheoretical.toLocaleString()} pts` },
           ].map((item, i) => (
-            <div key={i} className="flex items-center justify-between text-xs py-1">
+            <div key={i} className="flex items-center justify-between text-xs py-1.5 border-b border-border last:border-0">
               <span className="text-muted-foreground">{item.label}</span>
               <span className="font-data text-foreground font-medium">{item.value}</span>
             </div>
           ))}
         </div>
-        <div className="mt-3 p-2.5 rounded-md flex items-center gap-2" style={{ background: "hsl(var(--success) / 0.08)" }}>
-          <CheckCircle2 className="w-3.5 h-3.5" style={{ color: "hsl(var(--success))" }} />
-          <span className="text-[11px]" style={{ color: "hsl(var(--success))" }}>
+        <div className="mt-4 p-3 rounded-lg flex items-center gap-2" style={{ background: "hsl(var(--success) / 0.08)", border: "1px solid hsl(var(--success) / 0.2)" }}>
+          <CheckCircle2 className="w-3.5 h-3.5 text-success" />
+          <span className="text-[11px] text-success font-medium">
             No feasible allocation can exceed this result
           </span>
         </div>

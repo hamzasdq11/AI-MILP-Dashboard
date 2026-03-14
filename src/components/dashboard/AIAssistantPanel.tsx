@@ -30,13 +30,12 @@ export default function AIAssistantPanel() {
       initial={{ x: 20, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.4, ease: [0.2, 0.8, 0.2, 1] }}
-      className="w-[320px] min-w-[320px] h-screen border-l border-border overflow-y-auto"
-      style={{ background: "hsl(var(--sidebar-background))" }}
+      className="w-[320px] min-w-[320px] h-screen border-l border-border overflow-y-auto bg-card"
     >
       <div className="p-4 border-b border-border">
         <div className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-md flex items-center justify-center" style={{ background: "hsl(var(--primary) / 0.15)" }}>
-            <Brain className="w-3.5 h-3.5" style={{ color: "hsl(var(--primary))" }} />
+          <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: "hsl(var(--primary) / 0.1)" }}>
+            <Brain className="w-3.5 h-3.5 text-primary" />
           </div>
           <div>
             <h2 className="text-sm font-semibold text-foreground">AI Executive Summary</h2>
@@ -52,8 +51,7 @@ export default function AIAssistantPanel() {
             initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.3 + i * 0.08, duration: 0.4, ease: [0.2, 0.8, 0.2, 1] }}
-            className="p-3 rounded-md border border-border/50 hover:border-border transition-colors cursor-pointer group"
-            style={{ background: "hsl(var(--muted) / 0.3)" }}
+            className="p-3 rounded-lg border border-border hover:border-primary/30 transition-colors cursor-pointer group bg-background"
           >
             <div className="flex items-start justify-between mb-1">
               <h4 className="text-xs font-semibold text-foreground">{insight.title}</h4>
@@ -70,10 +68,10 @@ export default function AIAssistantPanel() {
         <p className="text-[11px] text-muted-foreground mb-3">
           The AI provides recommendations. The final decision rests with the Academic Policy Office.
         </p>
-        <button className="w-full py-2 rounded-md text-xs font-medium border transition-colors border-primary/30 text-primary hover:bg-primary/10">
+        <button className="w-full py-2.5 rounded-lg text-xs font-semibold border-2 transition-colors border-primary text-primary hover:bg-primary hover:text-primary-foreground">
           Confirm AI Suggestion
         </button>
-        <button className="w-full py-2 rounded-md text-xs font-medium text-muted-foreground hover:text-foreground transition-colors mt-1.5">
+        <button className="w-full py-2 rounded-lg text-xs font-medium text-muted-foreground hover:text-foreground transition-colors mt-2">
           Override & Adjust Manually
         </button>
       </div>
