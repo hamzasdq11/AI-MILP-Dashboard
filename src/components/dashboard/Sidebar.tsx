@@ -1,16 +1,16 @@
 import { motion } from "framer-motion";
 import { 
   BarChart3, 
-  Brain, 
   Settings, 
   Database,
   Layers,
   AlertTriangle,
   CheckCircle2,
   Zap,
-  GraduationCap
+  User
 } from "lucide-react";
 import { modelMetrics } from "@/data/allocationData";
+import iimLogo from "@/assets/iim-ranchi-logo.png";
 
 interface SidebarProps {
   activeSection: string;
@@ -36,26 +36,23 @@ export default function Sidebar({ activeSection, onSectionChange }: SidebarProps
         background: "linear-gradient(180deg, hsl(228, 62%, 14%), hsl(228, 62%, 10%))",
       }}
     >
-      {/* Logo Area */}
-      <div className="p-5 pb-6" style={{ borderBottom: "1px solid hsl(228, 45%, 22%)" }}>
+      {/* IIM Ranchi Logo + Branding */}
+      <div className="p-5 pb-4" style={{ borderBottom: "1px solid hsl(228, 45%, 22%)" }}>
         <div className="flex items-center gap-3">
-          <div
-            className="w-10 h-10 rounded-xl flex items-center justify-center"
-            style={{ background: "linear-gradient(135deg, hsl(210, 50%, 55%), hsl(210, 50%, 72%))" }}
-          >
-            <GraduationCap className="w-5 h-5 text-white" />
-          </div>
+          <img src={iimLogo} alt="IIM Ranchi" className="w-11 h-11 object-contain" style={{ filter: "brightness(0) invert(1)" }} />
           <div>
-            <h1 className="text-sm font-extrabold text-white tracking-tight">MILP Allocator</h1>
-            <p className="text-[10px] font-medium" style={{ color: "hsl(220, 25%, 60%)" }}>IIM Ranchi · Term IV</p>
+            <h1 className="text-sm font-extrabold text-white tracking-tight leading-tight">MILP Allocator</h1>
+            <p className="text-[9px] font-medium" style={{ color: "hsl(220, 25%, 55%)" }}>
+              AI-Powered Course Allocation
+            </p>
           </div>
         </div>
 
-        {/* Decorative geometric dots (from PPTX) */}
-        <div className="mt-4 flex gap-1.5">
-          {[...Array(6)].map((_, i) => (
-            <div key={i} className="w-1.5 h-1.5 rounded-full" style={{ background: `hsl(210, 50%, ${45 + i * 8}%)` }} />
-          ))}
+        {/* Purpose statement */}
+        <div className="mt-3 p-2.5 rounded-lg" style={{ background: "hsl(228, 50%, 18%)", border: "1px solid hsl(228, 45%, 24%)" }}>
+          <p className="text-[9px] leading-relaxed font-medium" style={{ color: "hsl(220, 25%, 65%)" }}>
+            Engineered to solve the <span className="text-white font-bold">NP-hard elective allocation problem</span> for 373 students across 39 courses using Mixed-Integer Linear Programming, maximising bid satisfaction under institutional constraints.
+          </p>
         </div>
       </div>
 
@@ -80,7 +77,7 @@ export default function Sidebar({ activeSection, onSectionChange }: SidebarProps
       </nav>
 
       {/* Model Status */}
-      <div className="p-4 mx-3 mb-3 rounded-xl" style={{ background: "hsl(228, 50%, 18%)", border: "1px solid hsl(228, 45%, 24%)" }}>
+      <div className="p-4 mx-3 mb-2 rounded-xl" style={{ background: "hsl(228, 50%, 18%)", border: "1px solid hsl(228, 45%, 24%)" }}>
         <p className="text-[9px] font-bold uppercase tracking-[0.2em] mb-3" style={{ color: "hsl(220, 25%, 50%)" }}>
           Model Status
         </p>
@@ -89,6 +86,19 @@ export default function Sidebar({ activeSection, onSectionChange }: SidebarProps
           <StatusRow icon={<Zap className="w-3 h-3" />} label="Latency" value={`${modelMetrics.solveTime}s`} color="success" />
           <StatusRow icon={<Settings className="w-3 h-3" />} label="MIP Gap" value="0.065%" color="success" />
           <StatusRow icon={<Database className="w-3 h-3" />} label="Variables" value="14,959" color="primary" />
+        </div>
+      </div>
+
+      {/* Author */}
+      <div className="px-5 py-3" style={{ borderTop: "1px solid hsl(228, 45%, 22%)" }}>
+        <div className="flex items-center gap-2.5">
+          <div className="w-7 h-7 rounded-full flex items-center justify-center" style={{ background: "hsl(228, 50%, 22%)" }}>
+            <User className="w-3.5 h-3.5" style={{ color: "hsl(210, 50%, 72%)" }} />
+          </div>
+          <div>
+            <p className="text-[10px] font-bold text-white leading-tight">Mohammad Hamza Siddiqui</p>
+            <p className="text-[9px] font-medium" style={{ color: "hsl(220, 25%, 50%)" }}>IPM Year 1 · Roll: IPM29-24</p>
+          </div>
         </div>
       </div>
     </motion.aside>
