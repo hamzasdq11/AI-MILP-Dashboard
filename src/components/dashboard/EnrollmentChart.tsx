@@ -13,9 +13,9 @@ const chartData = activeCourses
   }));
 
 const getBarColor = (fill: number) => {
-  if (fill === 100) return "hsl(160, 70%, 36%)";
-  if (fill >= 60) return "hsl(230, 60%, 24%)";
-  return "hsl(38, 92%, 50%)";
+  if (fill === 100) return "hsl(152, 60%, 36%)";
+  if (fill >= 60) return "hsl(228, 62%, 22%)";
+  return "hsl(228, 45%, 55%)";
 };
 
 export default function EnrollmentChart() {
@@ -26,42 +26,43 @@ export default function EnrollmentChart() {
       transition={{ delay: 0.15, duration: 0.4, ease: [0.2, 0.8, 0.2, 1] }}
       className="glass-card p-5"
     >
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between mb-5">
         <div>
-          <h3 className="text-sm font-semibold text-foreground">Enrollment Distribution</h3>
-          <p className="text-[11px] text-muted-foreground mt-0.5">Top 15 courses · Capacity vs Enrolled</p>
+          <h3 className="text-sm font-bold text-foreground">Enrollment Distribution</h3>
+          <p className="text-[10px] text-muted-foreground mt-0.5 font-medium">Top 15 courses · Capacity vs Enrolled</p>
         </div>
         <span className="ai-badge">AI Optimised</span>
       </div>
       <ResponsiveContainer width="100%" height={280}>
         <BarChart data={chartData} margin={{ top: 5, right: 10, left: -10, bottom: 5 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="hsl(225, 30%, 88%)" vertical={false} />
+          <CartesianGrid strokeDasharray="3 3" stroke="hsl(228, 30%, 90%)" vertical={false} />
           <XAxis
             dataKey="name"
-            tick={{ fontSize: 9, fill: "hsl(220, 10%, 46%)" }}
+            tick={{ fontSize: 8, fill: "hsl(220, 12%, 44%)", fontWeight: 500 }}
             angle={-40}
             textAnchor="end"
             height={70}
-            axisLine={{ stroke: "hsl(225, 30%, 88%)" }}
+            axisLine={{ stroke: "hsl(228, 30%, 85%)" }}
             tickLine={false}
           />
           <YAxis
-            tick={{ fontSize: 10, fill: "hsl(220, 10%, 46%)" }}
+            tick={{ fontSize: 10, fill: "hsl(220, 12%, 44%)", fontWeight: 500 }}
             axisLine={false}
             tickLine={false}
           />
           <Tooltip
             contentStyle={{
               background: "hsl(0, 0%, 100%)",
-              border: "1px solid hsl(225, 30%, 82%)",
-              borderRadius: "8px",
+              border: "2px solid hsl(228, 62%, 18%)",
+              borderRadius: "12px",
               fontSize: "11px",
-              color: "hsl(225, 50%, 14%)",
-              boxShadow: "0 4px 12px hsl(230, 60%, 24%, 0.1)",
+              color: "hsl(228, 55%, 12%)",
+              boxShadow: "0 8px 24px hsl(228, 62%, 18%, 0.12)",
+              fontWeight: 500,
             }}
           />
-          <Bar dataKey="capacity" fill="hsl(220, 14%, 90%)" radius={[3, 3, 0, 0]} barSize={14} name="Capacity" />
-          <Bar dataKey="enrolled" radius={[3, 3, 0, 0]} barSize={14} name="Enrolled">
+          <Bar dataKey="capacity" fill="hsl(228, 30%, 90%)" radius={[4, 4, 0, 0]} barSize={14} name="Capacity" />
+          <Bar dataKey="enrolled" radius={[4, 4, 0, 0]} barSize={14} name="Enrolled">
             {chartData.map((entry, index) => (
               <Cell key={index} fill={getBarColor(entry.fill)} />
             ))}

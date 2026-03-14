@@ -13,23 +13,31 @@ export default function CourseTable() {
       transition={{ delay: 0.2, duration: 0.4, ease: [0.2, 0.8, 0.2, 1] }}
       className="glass-card overflow-hidden"
     >
-      <div className="flex items-center justify-between p-4 border-b border-border">
+      <div className="flex items-center justify-between p-5" style={{ borderBottom: "2px solid hsl(228, 30%, 90%)" }}>
         <div>
-          <h3 className="text-sm font-semibold text-foreground">Course Allocation Matrix</h3>
-          <p className="text-[11px] text-muted-foreground mt-0.5">
+          <h3 className="text-sm font-bold text-foreground">Course Allocation Matrix</h3>
+          <p className="text-[10px] text-muted-foreground mt-0.5 font-medium">
             {showCancelled ? "9 courses cancelled by solver" : "30 active courses · sorted by enrollment"}
           </p>
         </div>
-        <div className="flex gap-1">
+        <div className="flex gap-1 p-1 rounded-xl" style={{ background: "hsl(228, 30%, 92%)" }}>
           <button
             onClick={() => setShowCancelled(false)}
-            className={`text-xs px-3 py-1.5 rounded-md transition-colors ${!showCancelled ? "bg-primary/15 text-primary" : "text-muted-foreground hover:text-foreground"}`}
+            className={`text-[10px] font-bold px-4 py-2 rounded-lg transition-all ${
+              !showCancelled
+                ? "bg-white text-foreground shadow-sm"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
           >
             Active ({activeCourses.length})
           </button>
           <button
             onClick={() => setShowCancelled(true)}
-            className={`text-xs px-3 py-1.5 rounded-md transition-colors ${showCancelled ? "bg-risk/15 text-risk" : "text-muted-foreground hover:text-foreground"}`}
+            className={`text-[10px] font-bold px-4 py-2 rounded-lg transition-all ${
+              showCancelled
+                ? "bg-white text-foreground shadow-sm"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
           >
             Cancelled ({cancelledCourses.length})
           </button>
@@ -38,15 +46,15 @@ export default function CourseTable() {
 
       <div className="overflow-auto max-h-[460px]">
         <table className="w-full text-xs">
-          <thead className="sticky top-0" style={{ background: "hsl(var(--card))" }}>
-            <tr className="border-b border-border">
-              <th className="text-left p-3 text-muted-foreground font-medium">#</th>
-              <th className="text-left p-3 text-muted-foreground font-medium">Course</th>
-              <th className="text-right p-3 text-muted-foreground font-medium">Cap</th>
-              <th className="text-right p-3 text-muted-foreground font-medium">Bidders</th>
-              <th className="text-right p-3 text-muted-foreground font-medium">Enrolled</th>
-              <th className="text-left p-3 text-muted-foreground font-medium pl-4">Fill %</th>
-              <th className="text-right p-3 text-muted-foreground font-medium">Status</th>
+          <thead className="sticky top-0 bg-card z-10">
+            <tr style={{ borderBottom: "2px solid hsl(228, 30%, 88%)" }}>
+              <th className="text-left p-3 text-[10px] font-bold uppercase tracking-wider text-muted-foreground">#</th>
+              <th className="text-left p-3 text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Course</th>
+              <th className="text-right p-3 text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Cap</th>
+              <th className="text-right p-3 text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Bidders</th>
+              <th className="text-right p-3 text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Enrolled</th>
+              <th className="text-left p-3 pl-4 text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Fill %</th>
+              <th className="text-right p-3 text-[10px] font-bold uppercase tracking-wider text-muted-foreground">Status</th>
             </tr>
           </thead>
           <tbody>
@@ -56,13 +64,14 @@ export default function CourseTable() {
                 initial={{ opacity: 0, x: -5 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: i * 0.02, duration: 0.3 }}
-                className="border-b border-border/50 hover:bg-surface-hover transition-colors"
+                className="transition-colors hover:bg-surface-hover"
+                style={{ borderBottom: "1px solid hsl(228, 30%, 92%)" }}
               >
                 <td className="p-3 font-data text-muted-foreground">{i + 1}</td>
-                <td className="p-3 font-medium text-foreground">{course.name}</td>
+                <td className="p-3 font-semibold text-foreground">{course.name}</td>
                 <td className="p-3 text-right font-data text-muted-foreground">{course.capacity}</td>
                 <td className="p-3 text-right font-data text-muted-foreground">{course.bidders}</td>
-                <td className="p-3 text-right font-data font-semibold text-foreground">{course.enrolled}</td>
+                <td className="p-3 text-right font-data font-bold text-foreground">{course.enrolled}</td>
                 <td className="p-3 pl-4 w-[140px]">
                   {course.status === "active" ? (
                     <div className="flex items-center gap-2">
@@ -81,7 +90,7 @@ export default function CourseTable() {
                           }}
                         />
                       </div>
-                      <span className="font-data text-muted-foreground w-10 text-right">{course.fillPercent.toFixed(0)}%</span>
+                      <span className="font-data text-muted-foreground w-10 text-right font-medium">{course.fillPercent.toFixed(0)}%</span>
                     </div>
                   ) : (
                     <span className="text-muted-foreground">—</span>

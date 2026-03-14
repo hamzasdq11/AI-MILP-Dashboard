@@ -4,8 +4,8 @@ import { studentStats } from "@/data/allocationData";
 
 const donutData = studentStats.map(s => ({ name: s.label, value: s.count }));
 const COLORS = [
-  "hsl(160, 70%, 36%)",
-  "hsl(230, 60%, 24%)",
+  "hsl(152, 60%, 36%)",
+  "hsl(228, 62%, 22%)",
   "hsl(38, 92%, 50%)",
   "hsl(0, 72%, 51%)",
   "hsl(280, 55%, 50%)",
@@ -19,21 +19,21 @@ export default function SatisfactionDonut() {
       transition={{ delay: 0.25, duration: 0.4, ease: [0.2, 0.8, 0.2, 1] }}
       className="glass-card p-5"
     >
-      <h3 className="text-sm font-semibold text-foreground mb-1">Student Satisfaction Breakdown</h3>
-      <p className="text-[11px] text-muted-foreground mb-3">How many of each student's top-6 they received</p>
+      <h3 className="text-sm font-bold text-foreground mb-1">Student Satisfaction Breakdown</h3>
+      <p className="text-[10px] text-muted-foreground mb-4 font-medium">How many of each student's top-6 they received</p>
 
-      <div className="flex items-center gap-4">
-        <div className="w-[140px] h-[140px] relative">
+      <div className="flex items-center gap-5">
+        <div className="w-[150px] h-[150px] relative">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
                 data={donutData}
                 cx="50%"
                 cy="50%"
-                innerRadius={42}
-                outerRadius={65}
+                innerRadius={44}
+                outerRadius={68}
                 dataKey="value"
-                strokeWidth={2}
+                strokeWidth={3}
                 stroke="hsl(0, 0%, 100%)"
               >
                 {donutData.map((_, i) => (
@@ -43,17 +43,17 @@ export default function SatisfactionDonut() {
             </PieChart>
           </ResponsiveContainer>
           <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <span className="font-data text-lg font-bold text-primary">96.7%</span>
-            <span className="text-[9px] text-muted-foreground">Satisfaction</span>
+            <span className="font-data text-xl font-bold" style={{ color: "hsl(228, 62%, 18%)" }}>96.7%</span>
+            <span className="text-[8px] text-muted-foreground font-bold uppercase tracking-wider">Satisfaction</span>
           </div>
         </div>
 
-        <div className="flex-1 space-y-2">
+        <div className="flex-1 space-y-2.5">
           {studentStats.map((stat, i) => (
-            <div key={stat.label} className="flex items-center gap-2 text-xs">
-              <div className="w-2.5 h-2.5 rounded-sm flex-shrink-0" style={{ background: COLORS[i] }} />
-              <span className="text-muted-foreground flex-1">{stat.label}</span>
-              <span className="font-data font-medium text-foreground">{stat.count}</span>
+            <div key={stat.label} className="flex items-center gap-2.5 text-xs">
+              <div className="w-3 h-3 rounded flex-shrink-0" style={{ background: COLORS[i] }} />
+              <span className="text-muted-foreground flex-1 font-medium">{stat.label}</span>
+              <span className="font-data font-bold text-foreground">{stat.count}</span>
               <span className="font-data text-muted-foreground w-12 text-right">{stat.percent}%</span>
             </div>
           ))}
