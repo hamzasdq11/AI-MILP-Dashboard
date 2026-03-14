@@ -23,9 +23,12 @@ interface SidebarProps {
 const navItems = [
   { id: "overview", label: "Command Center", icon: BarChart3 },
   { id: "courses", label: "Course Matrix", icon: Database },
+  { id: "methodology", label: "Methodology", icon: GitBranch },
+  { id: "humanai", label: "Human vs AI", icon: Users2 },
   { id: "constraints", label: "Constraint Engine", icon: Layers },
   { id: "whatif", label: "What-If Analysis", icon: Zap },
   { id: "exceptions", label: "Exception Audit", icon: AlertTriangle },
+  { id: "impact", label: "Impact & Scope", icon: TrendingUp },
 ];
 
 export default function Sidebar({ activeSection, onSectionChange }: SidebarProps) {

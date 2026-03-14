@@ -8,6 +8,9 @@ import ConstraintPanel from "@/components/dashboard/ConstraintPanel";
 import WhatIfPanel from "@/components/dashboard/WhatIfPanel";
 import ExceptionPanel from "@/components/dashboard/ExceptionPanel";
 import AIAssistantPanel from "@/components/dashboard/AIAssistantPanel";
+import MethodologyPanel from "@/components/dashboard/MethodologyPanel";
+import HumanAIPanel from "@/components/dashboard/HumanAIPanel";
+import ImpactPanel from "@/components/dashboard/ImpactPanel";
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState("overview");
